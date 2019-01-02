@@ -1,4 +1,18 @@
 server:
-	port:6060
+  port: 6060
+
 spring:
-	
+  datasource:
+    url: jdbc:mysql://localhost:3306/myProject
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+  devtools:
+    restart:
+      #热部署开关
+      enabled: true
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+
+
