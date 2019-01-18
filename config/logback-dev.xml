@@ -1,0 +1,40 @@
+<configuration scan="true">
+	<property name="LOG_HOME" value="D:/logs/tm_service" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="sysLog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/sys.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/sys.log.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="opLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/opLog.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/opLog.log.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="chances" level="DEBUG" additivity="false">
+		<appender-ref ref="opLog" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+
+	<root level="INFO">
+		<appender-ref ref="sysLog" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
